@@ -2,6 +2,8 @@
 
 `cpig` is a simple C-based program designed to generate a color palette from an image file. It uses the K-means clustering algorithm to extract dominant colors from an image and saves them in a specified format. This tool can be useful for designers, developers, and anyone who wants to create a color palette based on an image.
 
+![CPIG Banner](https://nnisarg.in/images/projects/CPIG.jpg)
+
 ## Table of Contents
 
 - [Features](#features)
