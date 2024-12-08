@@ -1,0 +1,41 @@
+# Ignore object files
+*.o
+
+# Ignore executable binary files
+c_color
+
+# Ignore compiled libraries
+*.a
+*.so
+*.dll
+
+# Ignore dependency files
+*.d
+
+# Ignore debug files
+*.log
+*.out
+*.dSYM/
+
+# Ignore build directories
+/build/
+bin/
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore generated files
+*.bak
+*.tmp
+*.swp
+
+# Ignore configuration files
+*.cfg
+*.ini
+
+# Ignore any hidden system files or folders
+.DS_Store
+Thumbs.db
