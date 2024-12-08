@@ -2,7 +2,7 @@
 *.o
 
 # Ignore executable binary files
-c_color
+cpig
 
 # Ignore compiled libraries
 *.a
