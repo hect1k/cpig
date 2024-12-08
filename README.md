@@ -15,7 +15,7 @@
 - [Usage](#usage)
   - [Command-Line Arguments](#command-line-arguments)
   - [Example Usage](#example-usage)
-- [To-Do](#to-do)
+- [TODO](#todo)
 - [License](#license)
 - [Contributing](#contributing)
 
