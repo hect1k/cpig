@@ -1,6 +1,6 @@
-# c_color - Color Palette Generator from Images
+# CPIG - Color Palette Inference Generator
 
-`c_color` is a simple C-based program designed to generate a color palette from an image file. It uses the K-means clustering algorithm to extract dominant colors from an image and saves them in a specified format. This tool can be useful for designers, developers, and anyone who wants to create a color palette based on an image.
+`cpig` is a simple C-based program designed to generate a color palette from an image file. It uses the K-means clustering algorithm to extract dominant colors from an image and saves them in a specified format. This tool can be useful for designers, developers, and anyone who wants to create a color palette based on an image.
 
 ## Table of Contents
 
@@ -37,8 +37,8 @@
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/c_color.git
-   cd c_color
+   git clone https://github.com/yourusername/cpig.git
+   cd cpig
    ```
 
 2. Install the necessary dependencies (STB Image library is included with the project):
@@ -53,14 +53,14 @@ To build the project, run the following command in the terminal:
 make clean install
 ```
 
-This will compile the project and generate the `c_color` binary.
+This will compile the project and generate the `cpig` binary.
 
 ### Running the Program
 
 After building the program, you can run it using the following command:
 
 ```bash
-./c_color <image_file> [--colors=<number>] [--output=<file>]
+./cpig <image_file> [--colors=<number>] [--output=<file>]
 ```
 
 ## Usage
@@ -76,19 +76,19 @@ After building the program, you can run it using the following command:
 1. **Generate a palette with the default settings (5 colors) and print it to the console:**
 
    ```bash
-   ./c_color input.jpg
+   ./cpig input.jpg
    ```
 
 2. **Generate a palette with 6 colors and save it to a file:**
 
    ```bash
-   ./c_color input.jpg --colors=6 --output=colors.txt
+   ./cpig input.jpg --colors=6 --output=colors.txt
    ```
 
 3. **Generate a palette with 10 colors and save it to a file (alternative option for `--colors`):**
 
    ```bash
-   ./c_color input.jpg -c=10 -o=palette.txt
+   ./cpig input.jpg -c=10 -o=palette.txt
    ```
 
 The generated palette will be in hexadecimal format, like:

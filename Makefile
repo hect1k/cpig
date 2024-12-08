@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -O2 -lm
 
 SRC = main.c
 OBJ = main.o
-EXE = c_color
+EXE = cpig
 
 all: $(EXE)
 
@@ -20,9 +20,9 @@ install: $(EXE)
 	cp $(EXE) /usr/local/bin/
 
 help:
-	@echo "Makefile for c_color program"
+	@echo "Makefile for cpig program"
 	@echo "Usage:"
-	@echo "  make         Build the c_color executable"
+	@echo "  make         Build the cpig executable"
 	@echo "  make clean   Remove compiled object files and executable"
 	@echo "  make install Install the program"
 	@echo "  make help    Show this message"
