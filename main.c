@@ -8,6 +8,8 @@
 
 #define DEFAULT_PALETTE_SIZE 5
 
+int verbose = 0;
+
 typedef struct {
   uint8_t r, g, b;
 } Color;
@@ -31,6 +33,10 @@ int assign_to_nearest_cluster(Color pixel, Color *centroids, int num_clusters) {
   return best_cluster;
 }
 
+void convert_color_to_hex(Color color, char *hex) {
+  sprintf(hex, "#%02X%02X%02X", color.r, color.g, color.b);
+}
+
 void generate_color_palette(uint8_t *pixels, int width, int height,
                             int channels, Color *palette, int palette_size) {
   if (!palette || !pixels) {
@@ -52,6 +58,10 @@ void generate_color_palette(uint8_t *pixels, int width, int height,
   }
 
   for (int iter = 0; iter < 10; iter++) {
+    if (verbose) {
+      printf("Iteration %d\n", iter + 1);
+    }
+
     for (int i = 0; i < width * height; i++) {
       Color pixel = {pixels[i * channels], pixels[i * channels + 1],
                      pixels[i * channels + 2]};
@@ -93,13 +103,18 @@ void generate_color_palette(uint8_t *pixels, int width, int height,
     free(sum_r);
     free(sum_g);
     free(sum_b);
+
+    if (verbose) {
+      printf("Updated Centroids:\n");
+      for (int i = 0; i < palette_size; i++) {
+        char hex[8];
+        convert_color_to_hex(palette[i], hex);
+        printf("Color %d: %s\n", i + 1, hex);
+      }
+    }
   }
 
   free(assignments);
-}
-
-void convert_color_to_hex(Color color, char *hex) {
-  sprintf(hex, "#%02X%02X%02X", color.r, color.g, color.b);
 }
 
 void save_palette_to_file(Color *palette, int palette_size,
@@ -119,58 +134,52 @@ void save_palette_to_file(Color *palette, int palette_size,
   fclose(file);
 }
 
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    printf("Usage: %s <image_file> [--colors=<number>] [--output=<file>]\n",
-           argv[0]);
-    return 1;
-  }
+int printUsage() {
+  printf("Usage: cpig image_path [options]\n");
+  printf("Options:\n");
+  printf("  -c, --colors   Number of colors in the palette (default: %d)\n",
+         DEFAULT_PALETTE_SIZE);
+  printf("  -o, --output   Output palette file\n");
+  printf("  -v, --verbose  Enable verbose output\n");
+  printf("  -h, --help     Print this help message\n");
+  return 1;
+}
 
-  char *image_file = argv[1];
+int main(int argc, char *argv[]) {
+  char image_file[512] = {0};
   int palette_size = DEFAULT_PALETTE_SIZE;
   char *output_file = NULL;
 
-  for (int i = 2; i < argc; i++) {
-    if (strncmp(argv[i], "--colors=", 9) == 0 ||
-        strncmp(argv[i], "-c", 2) == 0) {
-      if (strncmp(argv[i], "-c=", 3) == 0) {
-        palette_size = atoi(argv[i] + 3); // -c=6
-      } else if (strncmp(argv[i], "-c", 2) == 0) {
-        if (i + 1 < argc && argv[i + 1][0] != '-') {
-          palette_size = atoi(argv[i + 1]); // -c 6
-          i++; // Skip the next argument because it's the value for -c
-        } else {
-          printf("Invalid argument for palette size. Using default size: %d\n",
-                 DEFAULT_PALETTE_SIZE);
-        }
-      } else if (strncmp(argv[i], "--colors=", 9) == 0) {
-        palette_size = atoi(argv[i] + 9);
-      }
+  if (argc < 2 || strcmp(argv[1], "-h") == 0 ||
+      strcmp(argv[1], "--help") == 0) {
+    return printUsage();
+  }
 
-      if (palette_size <= 0) {
-        printf("Invalid palette size. Using default size: %d\n",
-               DEFAULT_PALETTE_SIZE);
-        palette_size = DEFAULT_PALETTE_SIZE;
+  strcpy(image_file, argv[1]);
+
+  for (int i = 2; i < argc; i++) {
+    if (strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "--colors") == 0) {
+      if (i + 1 >= argc) {
+        printf("Error: Missing argument for option %s\n", argv[i]);
+        return printUsage();
       }
-    } else if (strncmp(argv[i], "--output=", 9) == 0 ||
-               strncmp(argv[i], "-o", 2) == 0) {
-      if (strncmp(argv[i], "-o=", 3) == 0) {
-        output_file = argv[i] + 3; // -o=file.sh
-      } else if (strncmp(argv[i], "-o", 2) == 0) {
-        if (i + 1 < argc && argv[i + 1][0] != '-') {
-          output_file = argv[i + 1]; // -o file.sh
-          i++; // Skip the next argument because it's the value for -o
-        } else {
-          printf("Invalid argument for output file.\n");
-        }
-      } else if (strncmp(argv[i], "--output=", 9) == 0) {
-        output_file = argv[i] + 9;
+      palette_size = atoi(argv[i + 1]);
+      i++;
+    } else if (strcmp(argv[i], "--output") == 0 || strcmp(argv[i], "-o") == 0) {
+      if (i + 1 >= argc) {
+        printf("Error: Missing argument for option %s\n", argv[i]);
+        return printUsage();
       }
+      output_file = argv[i + 1];
+      i++;
+    } else if (strcmp(argv[i], "-v") == 0 ||
+               strcmp(argv[i], "--verbose") == 0) {
+      verbose = 1;
+    } else if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
+      return printUsage();
     } else {
-      printf("Unknown argument: %s\n", argv[i]);
-      printf("Usage: %s <image_file> [--colors=<number>] [--output=<file>]\n",
-             argv[0]);
-      return 1;
+      printf("Error: Unknown option: %s\n", argv[i]);
+      return printUsage();
     }
   }
 
@@ -181,7 +190,10 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  printf("Image loaded: %dx%d, Channels: %d\n", width, height, channels);
+  if (verbose) {
+    printf("Image: %s\n", image_file);
+    printf("Dimensions: %dx%d, Channels: %d\n", width, height, channels);
+  }
 
   Color *palette = (Color *)malloc(palette_size * sizeof(Color));
   if (!palette) {
