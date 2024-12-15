@@ -15,7 +15,7 @@
 - [Usage](#usage)
   - [Command-Line Arguments](#command-line-arguments)
   - [Example Usage](#example-usage)
-- [TODO](#todo)
+- [To-Do](#todo)
 - [License](#license)
 - [Contributing](#contributing)
 
@@ -39,7 +39,7 @@
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/cpig.git
+   git clone https://github.com/nnisarggada/cpig.git
    cd cpig
    ```
 
