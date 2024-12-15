@@ -139,7 +139,6 @@ int printUsage() {
   printf("Options:\n");
   printf("  -c, --colors   Number of colors in the palette (default: %d)\n",
          DEFAULT_PALETTE_SIZE);
-  printf("  -o, --output   Output palette file\n");
   printf("  -v, --verbose  Enable verbose output\n");
   printf("  -h, --help     Print this help message\n");
   return 1;
@@ -209,11 +208,10 @@ int main(int argc, char *argv[]) {
     save_palette_to_file(palette, palette_size, output_file);
     printf("Palette written to file: %s\n", output_file);
   } else {
-    printf("Generated Palette:\n");
     for (int i = 0; i < palette_size; i++) {
       char hex[8];
       convert_color_to_hex(palette[i], hex);
-      printf("Color %d: %s\n", i + 1, hex);
+      printf("%s\n", hex);
     }
   }
 
