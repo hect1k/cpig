@@ -62,7 +62,12 @@ This will compile the project and generate the `cpig` binary.
 After building the program, you can run it using the following command:
 
 ```bash
-./cpig <image_file> [--colors=<number>] [--output=<file>]
+./cpig image_path [options]
+
+Options:
+  -c, --colors   Number of colors in the palette (default: 5)
+  -v, --verbose  Enable verbose output
+  -h, --help     Print this help message
 ```
 
 ## Usage
@@ -70,8 +75,9 @@ After building the program, you can run it using the following command:
 ### Command-Line Arguments
 
 - `image_file`: The path to the image file from which you want to extract the color palette.
-- `--colors=<number>` or `-c=<number>`: Specify the number of colors to extract (default: 5).
-- `--output=<file>` or `-o=<file>`: Specify the output file to save the color palette (default: print to console).
+- `--colors <number>` or `-c <number>`: Specify the number of colors to extract (default: 5).
+- `--verbose` or `-v`: Enable verbose output.
+- `--help` or `-h`: Print this help message.
 
 ### Example Usage
 
@@ -81,16 +87,16 @@ After building the program, you can run it using the following command:
    ./cpig input.jpg
    ```
 
-2. **Generate a palette with 6 colors and save it to a file:**
+2. **Generate a palette with 6 colors:**
 
    ```bash
-   ./cpig input.jpg --colors=6 --output=colors.txt
+   ./cpig input.jpg --colors 6
    ```
 
-3. **Generate a palette with 10 colors and save it to a file (alternative option for `--colors`):**
+3. **Generate a palette with 10 colors and enable verbose output:**
 
    ```bash
-   ./cpig input.jpg -c=10 -o=palette.txt
+   ./cpig input.jpg -c 10 -v
    ```
 
 The generated palette will be in hexadecimal format, like:
