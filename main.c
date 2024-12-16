@@ -147,7 +147,6 @@ int printUsage() {
 int main(int argc, char *argv[]) {
   char image_file[512] = {0};
   int palette_size = DEFAULT_PALETTE_SIZE;
-  char *output_file = NULL;
 
   if (argc < 2 || strcmp(argv[1], "-h") == 0 ||
       strcmp(argv[1], "--help") == 0) {
@@ -163,13 +162,6 @@ int main(int argc, char *argv[]) {
         return printUsage();
       }
       palette_size = atoi(argv[i + 1]);
-      i++;
-    } else if (strcmp(argv[i], "--output") == 0 || strcmp(argv[i], "-o") == 0) {
-      if (i + 1 >= argc) {
-        printf("Error: Missing argument for option %s\n", argv[i]);
-        return printUsage();
-      }
-      output_file = argv[i + 1];
       i++;
     } else if (strcmp(argv[i], "-v") == 0 ||
                strcmp(argv[i], "--verbose") == 0) {
@@ -203,17 +195,6 @@ int main(int argc, char *argv[]) {
 
   generate_color_palette(image_data, width, height, channels, palette,
                          palette_size);
-
-  if (output_file) {
-    save_palette_to_file(palette, palette_size, output_file);
-    printf("Palette written to file: %s\n", output_file);
-  } else {
-    for (int i = 0; i < palette_size; i++) {
-      char hex[8];
-      convert_color_to_hex(palette[i], hex);
-      printf("%s\n", hex);
-    }
-  }
 
   free(palette);
   stbi_image_free(image_data);
