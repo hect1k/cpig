@@ -117,23 +117,6 @@ void generate_color_palette(uint8_t *pixels, int width, int height,
   free(assignments);
 }
 
-void save_palette_to_file(Color *palette, int palette_size,
-                          const char *filename) {
-  FILE *file = fopen(filename, "w");
-  if (!file) {
-    printf("Error: Unable to write to file %s\n", filename);
-    return;
-  }
-
-  for (int i = 0; i < palette_size; i++) {
-    char hex[8];
-    convert_color_to_hex(palette[i], hex);
-    fprintf(file, "%s\n", hex);
-  }
-
-  fclose(file);
-}
-
 int printUsage() {
   printf("Usage: cpig image_path [options]\n");
   printf("Options:\n");
@@ -195,6 +178,12 @@ int main(int argc, char *argv[]) {
 
   generate_color_palette(image_data, width, height, channels, palette,
                          palette_size);
+
+  for (int i = 0; i < palette_size; i++) {
+    char hex[8];
+    convert_color_to_hex(palette[i], hex);
+    printf("%s\n", hex);
+  }
 
   free(palette);
   stbi_image_free(image_data);
