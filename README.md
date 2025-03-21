@@ -39,7 +39,7 @@
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/nnisarggada/cpig.git
+   git clone https://github.com/hect1k/cpig.git
    cd cpig
    ```
 

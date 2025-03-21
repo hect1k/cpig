@@ -22,7 +22,7 @@ Please review our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. We 
 
 ### Reporting Bugs
 
-If you encounter a bug or an issue with **cpig**, please [open a new issue](https://github.com/nnisarggada/cpig/issues/new) on the GitHub repository. Provide detailed information about the issue, including:
+If you encounter a bug or an issue with **cpig**, please [open a new issue](https://github.com/hect1k/cpig/issues/new) on the GitHub repository. Provide detailed information about the issue, including:
 
 - Steps to reproduce the problem.
 - The operating system and environment you're using.
@@ -30,7 +30,7 @@ If you encounter a bug or an issue with **cpig**, please [open a new issue](http
 
 ### Suggesting Enhancements
 
-If you have ideas for new features or enhancements to existing features, feel free to [create an enhancement request](https://github.com/nnisarggada/cpig/issues/new) on GitHub. Be clear and specific about the feature, its potential use cases, and how it would benefit **cpig**.
+If you have ideas for new features or enhancements to existing features, feel free to [create an enhancement request](https://github.com/hect1k/cpig/issues/new) on GitHub. Be clear and specific about the feature, its potential use cases, and how it would benefit **cpig**.
 
 ### Submitting Changes
 
@@ -39,7 +39,7 @@ We welcome code contributions! If you'd like to help improve **cpig**, follow th
 1. Fork the **cpig** repository on GitHub.
 2. Clone your fork to your local machine.
    ```bash
-   git clone https://github.com/nnisarggada/cpig.git
+   git clone https://github.com/hect1k/cpig.git
    cd cpig
    ```
 3. Create a new branch from `main` to work on your changes:
@@ -74,7 +74,7 @@ To build **cpig**, follow these steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/nnisarggada/cpig.git
+   git clone https://github.com/hect1k/cpig.git
    cd cpig
    ```
 
